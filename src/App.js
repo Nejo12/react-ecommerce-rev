@@ -1,41 +1,41 @@
-const App = () =>
-  <div className="categories-container">
-    <div className="category-container">
-      {/* img */ }
-      <div className="category-body-container">
-        <h2>Livestocks</h2>
-        <p>View More</p>
-      </div>
-    </div>
+const App = () => {
 
-    <div className="category-container">
-      {/* img */ }
-      <div className="category-body-container">
-        <h2>Vegetables</h2>
-        <p>View More</p>
-      </div>
-    </div>
-    <div className="category-container">
-      {/* img */ }
-      <div className="category-body-container">
-        <h2>Fruits</h2>
-        <p>View More</p>
-      </div>
-    </div>
-    <div className="category-container">
-      {/* img */ }
-      <div className="category-body-container">
-        <h2>Cereals</h2>
-        <p>View More</p>
-      </div>
-    </div>
-    <div className="category-container">
-      {/* img */ }
-      <div className="category-body-container">
-        <h2>Spices</h2>
-        <p>View More</p>
-      </div>
-    </div>
-  </div>
+	const categories = [
+		{
+			id: 1,
+			title: 'Livestock'
+		},
+		{
+			id: 2,
+			title: 'Vegetables'
+		},
+		{
+			id: 3,
+			title: 'Spices'
+		},
+		{
+			id: 4,
+			title: 'Cereals'
+		},
+		{
+			id: 5,
+			title: 'Fruits'
+		},
+	]
+
+	return (
+		<div className="categories-container">
+			{ categories.map(({ title }) => (
+				<div className="category-container">
+					{/* img */ }
+					<div className="category-body-container">
+						<h2>{ title }</h2>
+						<p>View More</p>
+					</div>
+				</div>
+			)
+			) }
+		</div>)
+}
 
 export default App;
