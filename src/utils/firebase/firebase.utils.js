@@ -4,46 +4,44 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCZoSGSJicaK9CuthGIv0K5n17bOr9LKmM",
-  authDomain: "the-farm-223df.firebaseapp.com",
-  databaseURL: "https://the-farm-223df.firebaseio.com",
-  projectId: "the-farm-223df",
-  storageBucket: "the-farm-223df.appspot.com",
-  messagingSenderId: "1061647793143",
-  appId: "1:1061647793143:web:2c9954d308f5dec9ca4cf2",
-  measurementId: "G-YS39S0BE7R"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DB_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APPS_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig)
-console.log('test firebaseApp: ', firebaseApp)
-console.log('test signInWithRedirect: ', signInWithRedirect)
 
 // init provider
-const provider = new GoogleAuthProvider()
+const googleProvider = new GoogleAuthProvider()
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
   prompt: 'select_account'
 })
 
 export const auth = getAuth()
-
-export const sign_in_with_popup = () => signInWithPopup(auth, provider)
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
 
 export const db = getFirestore()
 
 // storing into firestore
-export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocRef = doc(db, 'users', userAuth.uid)
-  console.log('userDocRef :=>', userDocRef)
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+  if (!userAuth) return
 
+  const userDocRef = doc(db, 'users', userAuth.uid)
   const userSnapshot = await getDoc(userDocRef)
-  console.log('userSnapshot:: ', userSnapshot)
-  console.log('userSnapshot:: ', userSnapshot.exist)
 
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
@@ -54,6 +52,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log('error creating the user', error.message);
@@ -62,3 +61,15 @@ export const createUserDocumentFromAuth = async (userAuth) => {
 
   return userDocRef;
 }
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+};
