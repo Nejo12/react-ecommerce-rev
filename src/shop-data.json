@@ -1,6 +1,7 @@
 [
     {
       "title": "Vegetables",
+        "price": 0.25,
       "imageUrl": "https://i.ibb.co/xYQNKvG/vegetables.jpg",
       "id": 1,
       "linkUrl": "shop/vegetables",
@@ -9,6 +10,7 @@
 
     {
       "title": "Fruits",
+        "price": 2.29,
       "imageUrl": "https://i.ibb.co/4mrd46D/fruits.jpg",
       "id": 2,
       "linkUrl": "shop/fruits",
@@ -17,6 +19,7 @@
     },
     {
       "title": "Cereals",
+        "price": 1.55,
       "imageUrl": "https://i.ibb.co/fCW4dq0/cereals.jpg",
       "id": 3,
       "linkUrl": "shop/cereals",
@@ -24,6 +27,7 @@
     },
     {
       "title": "Spices?",
+        "price": 0.25,
       "imageUrl": "https://i.ibb.co/KVYVRyV/spices.jpg",
       "id": 4,
       "linkUrl": "shop/spices",
@@ -31,6 +35,7 @@
     },
     {
       "title": "Diary",
+        "price": 4.55,
       "imageUrl": "https://i.ibb.co/FXP5G6g/milk.jpg",
       "id": 5,
       "linkUrl": "shop/diaries",
@@ -38,6 +43,7 @@
     },
     {
       "title": "Livestocks",
+        "price": 5.99,
       "imageUrl": "https://i.ibb.co/tJnsNr4/Cows.jpg",
       "id": 6,
       "linkUrl": "shop/livestocks",
